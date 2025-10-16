@@ -58,7 +58,8 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
   // Need to return an object with a paths key which holds an array of objects each with their own params key which included dynamic path name with the value for each.
   // Would use fetch to pull all required IDs and dynamically loop through and generate each paths object programmatically.
   return {
-    fallback: false, // set fallback to false if you have added all known dynamic values in paths array - would pre-render all routes statically, setting to true would indicate that only a few paths are known and would only generate the ones it can and then attempt to generate unknown paths on the server after pre-rendering otherwise will output a 404 page
+    // fallback: false, // set fallback to false if you have added all known dynamic values in paths array - would pre-render all routes statically, setting to true would indicate that only a few paths are known and would only generate the ones it can and then attempt to generate unknown paths on the server after pre-rendering otherwise will output a 404 page
+    fallback: "blocking", // Setting fallback to blocking will tell Next.js that if a new id value is provided that doesn't exist on Database it will generate that page on demand and then cache it.
     paths: meetups.map((meeptup) => ({
       params: { meetupId: meeptup._id.toString() },
     })),
