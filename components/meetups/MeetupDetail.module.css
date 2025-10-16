@@ -1,0 +1,9 @@
+.detail {
+  text-align: center;
+
+  img {
+    width: 100%;
+    display: block;
+    max-inline-size: 100%;
+  }
+}
