@@ -30,10 +30,14 @@ async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
 
     // const { title, image, address, description } = data;
 
+    // Insert username and password from env variables file to protect code base when committing to repo
+    const u = process.env.MONGO_DB_U;
+    const p = process.env.MONGO_DB_P;
+
     // store in database
     // Use MongoClient and use connect() method to connect to a MongoDB database from function - as this functions runs on the server can safely pass in username and password, will never get exposed on the client side.
     const client = await MongoClient.connect(
-      "mongodb+srv://liamgroves46_db_user:GudfgyfAb1OBlRkg@cluster0.jvfhbfw.mongodb.net/meetups?retryWrites=true&w=majority&appName=Cluster0"
+      `mongodb+srv://${u}:${p}@cluster0.jvfhbfw.mongodb.net/meetups?retryWrites=true&w=majority&appName=Cluster0`
     );
 
     // After awaiting connection to DB can use db() method to store database reference to variable

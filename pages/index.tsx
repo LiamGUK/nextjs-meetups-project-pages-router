@@ -56,9 +56,13 @@ export async function getStaticProps() {
   // Logic placed in this function will only ever execute on the server side, not Client so can be used to connect to Database's safely or pull data
   // fetch(url).then(returned data)
 
+  // Insert username and password from env variables file to protect code base when committing to repo
+  const u = process.env.MONGO_DB_U;
+  const p = process.env.MONGO_DB_P;
+
   // As getStaticProps only runs on the server can directly talk to database here instead of needing to fetch data via an API
   const client = await MongoClient.connect(
-    "mongodb+srv://liamgroves46_db_user:GudfgyfAb1OBlRkg@cluster0.jvfhbfw.mongodb.net/meetups?retryWrites=true&w=majority&appName=Cluster0"
+    `mongodb+srv://${u}:${p}@cluster0.jvfhbfw.mongodb.net/meetups?retryWrites=true&w=majority&appName=Cluster0`
   );
 
   const db = client.db();

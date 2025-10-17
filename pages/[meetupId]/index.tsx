@@ -41,8 +41,12 @@ interface StaticPropsResult {
 // getStaticPaths function is required to be exported from a dynamic page that uses the getStaticProps function
 // Required as Next.js will need to know all id values that are needed to pre-generate the pages
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
+  // Insert username and password from env variables file to protect code base when committing to repo
+  const u = process.env.MONGO_DB_U;
+  const p = process.env.MONGO_DB_P;
+
   const client = await MongoClient.connect(
-    "mongodb+srv://liamgroves46_db_user:GudfgyfAb1OBlRkg@cluster0.jvfhbfw.mongodb.net/meetups?retryWrites=true&w=majority&appName=Cluster0"
+    `mongodb+srv://${u}:${p}@cluster0.jvfhbfw.mongodb.net/meetups?retryWrites=true&w=majority&appName=Cluster0`
   );
 
   const db = client.db();
